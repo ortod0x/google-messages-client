@@ -5,8 +5,6 @@
 
 ### How to use
 
-1. Use it
-
 - Get session
 
 ```js
@@ -45,7 +43,7 @@ client.on('authenticated', async (service) => {
 })
 ```
 
-2. Send messages
+- Send messages
 
 ```js
 const { default: MessagesClient } = require('messages-web')
