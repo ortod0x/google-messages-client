@@ -1,0 +1,34 @@
+{
+  "name": "google-messages-client",
+  "version": "0.0.11",
+  "description": "",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ortod0x/google-messages-client.git"
+  },
+  "types": "index.d.ts",
+  "scripts": {
+    "dev": "nodemon index.ts",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm run clean && tsc -p .",
+    "build": "tsc -p .",
+    "clean": "git clean -fX dist/"
+  },
+  "keywords": [
+    "sms-api",
+    "google messages api",
+    "sms gateway",
+    "puppeteer"
+  ],
+  "author": "ortod0x",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^8.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.2.2"
+  }
+}
