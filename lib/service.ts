@@ -60,30 +60,33 @@ class MessageService {
     }
 
     async sendMessage (to: string, text: string) {
-        try {
-            await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
-        } catch (err) {
-            // Empty loader attached for immediate requests
-            // if this function is called after few seconds/after after content loaded
-            // then its no issue else this will go in an exception because nothing is loading
-        }
+        // try {
+        //     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+        // } catch (err) {
+        //     // Empty loader attached for immediate requests
+        //     // if this function is called after few seconds/after after content loaded
+        //     // then its no issue else this will go in an exception because nothing is loading
+        // }
+        await this.page.waitForNavigation({ waitUntil: 'load' })
         await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > mws-conversations-list > nav > div.conv-container.ng-star-inserted > mws-conversation-list-item')
 
         // TODO: parse to var to check if country code is included or not
         const newChatBtn = await this.page.$('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > div > mw-fab-link > a')
         await newChatBtn.click()
         await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+        // await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-new-conversation-container > mw-new-conversation-sub-header > div.contact-chip-input > div.input-container > mw-contact-chips-input > div > div > input');
         // await page.waitForSelector()
         // const numberInput = await page.$eval('#mat-chip-list-2 > div > input', (input) => {
         //     console.log(input)
         // })
         // const numberInput = await page.$('#mat-chip-list-2 > div > input')
-        try {
-            await this.page.waitForXPath('//*[@id="mat-chip-list-0"]/div/input', { timeout: 5000 })
-        } catch (err) { }
+        // try {
+        //     await this.page.waitForXPath('//*[@id="mat-chip-list-0"]/div/input', { timeout: 5000 })
+        // } catch (err) { }
         // await page.waitForTimeout(2 * 1000) // remove lateer
         // await this.page.waitForXPath('//*[@id="mat-chip-list-0"]/div/input')
-        let numberInput = await this.page.$x('//*[@id="mat-chip-list-0"]/div/input')
+        let numberInput = await this.page.$x('/html/body/mw-app/mw-bootstrap/div/main/mw-main-container/div/mw-new-conversation-container/mw-new-conversation-sub-header/div.contact-chip-input/div.input-container/mw-contact-chips-input/div/div/input')
+        // let numberInput = await this.page.$x('//*[@id="mat-chip-list-0"]/div/input')
         // console.log('NumberInput', numberInput)
         if (numberInput.length) {
             await numberInput[0].type(to)
