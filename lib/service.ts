@@ -67,7 +67,7 @@ class MessageService {
         //     // if this function is called after few seconds/after after content loaded
         //     // then its no issue else this will go in an exception because nothing is loading
         // }
-        await this.page.waitForNavigation({ waitUntil: 'load' })
+        await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
         //await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > mws-conversations-list > nav > div.conv-container.ng-star-inserted > mws-conversation-list-item')
 
         // TODO: parse to var to check if country code is included or not
