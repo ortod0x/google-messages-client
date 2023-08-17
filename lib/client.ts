@@ -32,7 +32,7 @@ class MessagesClient extends EventEmitter implements MessagesClient {
     private browser!: puppeteer.Browser
     private isAuthenticated: boolean = false
 
-    constructor (options: ClientOptions = { headless: false, credentials: { cookies: [], localStorage: {} } }) {
+    constructor (options: ClientOptions = { headless: true, credentials: { cookies: [], localStorage: {} } }) {
         super()
         this.launch(options)
     }
