@@ -59,6 +59,19 @@ class MessageService {
         return inbox
     }
 
+    async kirimPesan () {
+        await this.page.waitForNavigation({ waitUntil: 'load' })
+        await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > mws-conversations-list > nav > div.conv-container.ng-star-inserted > mws-conversation-list-item')
+
+        const newChatBtn = await this.page.$('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > div > mw-fab-link > a')
+        await newChatBtn.click()
+        await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
+        await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-new-conversation-container > mw-new-conversation-sub-header');
+
+        let numberInput = await this.page.$x('/html/body/mw-app/mw-bootstrap/div/main/mw-main-container/div/mw-new-conversation-container/mw-new-conversation-sub-header/div.contact-chip-input/div.input-container/mw-contact-chips-input/div/div/input')
+        console.log(numberInput)
+    }
+
     async sendMessage (to: string, text: string) {
         // try {
         //     await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
@@ -74,7 +87,7 @@ class MessageService {
         const newChatBtn = await this.page.$('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-main-nav > div > mw-fab-link > a')
         await newChatBtn.click()
         await this.page.waitForNavigation({ waitUntil: 'domcontentloaded' })
-        // await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-new-conversation-container > mw-new-conversation-sub-header > div.contact-chip-input > div.input-container > mw-contact-chips-input > div > div > input');
+        await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-new-conversation-container > mw-new-conversation-sub-header');
         // await page.waitForSelector()
         // const numberInput = await page.$eval('#mat-chip-list-2 > div > input', (input) => {
         //     console.log(input)
