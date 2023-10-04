@@ -69,7 +69,7 @@ class MessageService {
         await this.page.waitForSelector('body > mw-app > mw-bootstrap > div > main > mw-main-container > div > mw-new-conversation-container > mw-new-conversation-sub-header');
 
         let numberInput = await this.page.$('.input');
-        await numberInput.type('+' + to);
+        await numberInput.type(to);
         await this.page.waitForXPath('/html/body/mw-app/mw-bootstrap/div/main/mw-main-container/div/mw-new-conversation-container/div/mw-contact-selector-button/button');
         const contactBtn = await this.page.$x('/html/body/mw-app/mw-bootstrap/div/main/mw-main-container/div/mw-new-conversation-container/div/mw-contact-selector-button/button');
         await contactBtn[0].click();
